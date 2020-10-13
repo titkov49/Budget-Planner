@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import Select from 'react-select';
 import ListItem from './ListItem';
-import { initialLst, options } from '../constants';
+import { initialLst } from '../constants';
 
 const ListStyles = styled.div`
   @media screen and (min-width: 768px) {
