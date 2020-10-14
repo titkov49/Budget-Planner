@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import ListItem from './ListItem';
+import Form from '../Form';
+import { Button, SelectButton as FilterButton, ButtonsContainer} from '../styled';
 import { initialLst } from '../constants';
 
 const ListStyles = styled.div`
@@ -18,39 +20,8 @@ const InputContainer = styled.div`
   align-items: center;
 `;
 
-const ButtonsContainer = styled.div`
-  margin: 1rem 0;
-  text-align: left;
-`;
-
-const FilterButton = styled.button`
-  background-color: #E6E6E6;
-  padding: 0.75rem;
-  font-weight: 600;
-  margin-right: 1rem;
-  outline: none;
-  border: 1px solid white;
-  border-radius: 10px;
-  transition: all .3s;
-
-  &:hover {
-    border: 1px solid #6ABEA7;
-  }
-
-  &:active {
-    border: 1px solid white;
-    background-color: #6ABEA7;
-    color: white;
-  }
-  ${({ value, modType}) => {
-    if (modType === value) return `
-      background-color: #6ABEA7;
-      color: white;
-    `;
-  }}
-`;
-
 export default function () {
+  const [isFormOpen, setForm] = useState(true);
   const [initialList, setInitialList] = useState(initialLst)
   const [modifiedList, setList] = useState(initialLst);
   const [filterType, setFilterType] = useState('initial');
@@ -63,7 +34,7 @@ export default function () {
   useEffect(() => {
     setList(filterList(filterType));
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [filterType]);
+  }, [filterType, initialList]);
 
   const filterList = type => {
     if (type === "initial") {
@@ -76,13 +47,24 @@ export default function () {
     setFilterType('initial');
   }
 
+  const openForm = () => {
+    if (isFormOpen) return;
+    setForm(true);
+  };
+
   return (
     <ListStyles>
+      {isFormOpen && <Form 
+        onClose={() => setForm(false)}
+        onSave={setInitialList}
+        list={initialList}
+      />}
       <InputContainer>
         <ButtonsContainer>
-          <FilterButton onClick={reset} value="reset" modType={filterType}>Reset</FilterButton>
-          <FilterButton onClick={e => setFilterType(e.target.value)} value="income" modType={filterType}>Only incomes</FilterButton>
-          <FilterButton onClick={e => setFilterType(e.target.value)} value="spending" modType={filterType}>Only spendings</FilterButton>
+          <Button onClick={openForm}>Create</Button>
+          <Button onClick={reset} modType={filterType}>Reset List</Button>
+          <FilterButton onClick={e => setFilterType(e.target.value)} value="income" type={filterType}>Only incomes</FilterButton>
+          <FilterButton onClick={e => setFilterType(e.target.value)} value="spending" type={filterType}>Only spendings</FilterButton>
         </ButtonsContainer>
       </InputContainer>
       {modifiedList.map(item => <ListItem 

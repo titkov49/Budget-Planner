@@ -2,8 +2,11 @@ $darkgrey: #5E6973;
 $lightgrey: #E6E6E6;
 $lightcoral: #EF6F6C;
 $greensheen: #6ABEA7;
-$lightblue: #9FFFF5;
 
 .App {
   text-align: center;
+}
+
+.react-datepicker-wrapper {
+  width: 100%;
 }
