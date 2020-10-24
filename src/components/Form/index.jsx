@@ -1,62 +1,14 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
 import DatePicker from 'react-datepicker';
+import { 
+    FormContainer, StyledCloseIcon, 
+    Input, TextArea, BottomContainer,
+    BottomButton
+  } from './styled';
+import { ButtonsContainer, SelectButton } from '../common-styled';
 import "react-datepicker/dist/react-datepicker.css";
-import Close from '@material-ui/icons/Close';
-import {Button, SelectButton, ButtonsContainer} from './styled';
-
-const FormContainer = styled.div`
-  position: absolute;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1rem;
-  background-color: white;
-  border: 1px solid #000;
-
-  top:0;
-  right:0;
-  height: 100%;
-  width: 25%;
-  @media screen and (max-width: 768px) {
-    top: 0;
-    left: 0;
-    width: 100%;
-    border: none
-  }
-`;
-
-const StyledCloseIcon = styled(Close)`
-  color: #EF6F6C;
-  display: block !important;
-  margin-bottom: 1rem;
-`;
-
-const Input = styled.input`
-  width: 75%;
-  padding: 0.5rem;
-  margin-bottom: 1rem;
-`;
-
-const TextArea = styled.textarea`
-  margin-bottom: 1rem; 
-  width: 75%;
-  height: 15%;
-  padding: 0.5rem;
-  resize: none;
-`;
-
-const BottomContainer = styled.div`width: 100%`;
-
-const BottomButton = styled(Button)`
-  width: 75%;
-  color: ${({ color }) => color || "#5E6973"};
-`;
 
 export default function ({ item, list, onClose, onSave }) {
-  console.log("Form", list);
   const [newItem, setItem] = useState({
     name: item?.name || '',
     description: item?.description || '',
