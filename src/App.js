@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import ListItem from './components/ListItem';
 import Form from './components/Form';
+import ItemDescription from './components/ItemDescription';
 import { Button, SelectButton as FilterButton, ButtonsContainer} from './components/common-styled';
 import { initialLst } from './components/constants';
 import './App.scss';
@@ -22,7 +23,9 @@ const InputContainer = styled.div`
 `;
 
 export default function () {
-  const [isFormOpen, setForm] = useState(true);
+  const [isFormOpen, setForm] = useState(false);
+  const [isDescriptionOpen, setDescription] = useState(false);
+  const [listItem, setListItem] = useState(null);
   const [initialList, setInitialList] = useState(initialLst)
   const [modifiedList, setList] = useState(initialLst);
   const [filterType, setFilterType] = useState('initial');
@@ -55,11 +58,30 @@ export default function () {
 
   return (
     <ListStyles>
-      {isFormOpen && <Form 
-        onClose={() => setForm(false)}
-        onSave={setInitialList}
-        list={initialList}
-      />}
+      {
+        isFormOpen && <Form 
+          onClose={() => {
+            setForm(false);
+            setListItem(null);
+          }}
+          onSave={setInitialList}
+          list={initialList}
+          item={listItem}
+        />
+      }
+      {
+        listItem && isDescriptionOpen && <ItemDescription
+          item={listItem}
+          onEdit={() => {
+            setForm(true);
+            setDescription(false)
+          }}
+          onClose={() => {
+            setListItem(null);
+            setDescription(false);
+          }}
+        />
+      }
       <InputContainer>
         <ButtonsContainer>
           <Button onClick={openForm}>Create</Button>
@@ -68,12 +90,17 @@ export default function () {
           <FilterButton onClick={e => setFilterType(e.target.value)} value="spending" type={filterType}>Only spendings</FilterButton>
         </ButtonsContainer>
       </InputContainer>
-      {modifiedList.map(item => <ListItem 
-        item={item}
-        onDelete={onDelete}
-        onDescription={() => alert('Description!')}
-        key={item.id}
-      />)}
+      {
+        modifiedList.map(item => <ListItem 
+          item={item}
+          onDelete={onDelete}
+          onDescription={() => {
+            setListItem(item);
+            setDescription(true);
+          }}
+          key={item.id}
+        />)
+      }
     </ListStyles>
   );
 };

@@ -1,12 +1,9 @@
 import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
-import { 
-    FormContainer, StyledCloseIcon, 
-    Input, TextArea, BottomContainer,
-    BottomButton
-  } from './styled';
-import { ButtonsContainer, SelectButton } from '../common-styled';
 import "react-datepicker/dist/react-datepicker.css";
+import { Input, TextArea } from './styled';
+import { ButtonsContainer, SelectButton } from '../common-styled';
+import SidebarContainer from '../SidebarContainer';
 
 export default function ({ item, list, onClose, onSave }) {
   const [newItem, setItem] = useState({
@@ -38,50 +35,47 @@ export default function ({ item, list, onClose, onSave }) {
   };
 
   return (
-    <FormContainer>
-      <div>
-        <StyledCloseIcon onClick={onClose}/>
-        <Input
-          type="text"
-          placeholder="Enter name"
-          value={newItem.name}
-          onChange={e => changeProp(e, 'name')}
-        />
-        <Input
-          type="text"
-          placeholder="Enter value"
-          value={newItem.value}
-          onChange={e => changeProp(e, 'value')}
-        />
-        <TextArea
-          cols="4"
-          placeholder="Enter description"
-          value={newItem.description}
-          onChange={e => changeProp(e, 'description')}
-        />
-        <DatePicker
-          selected={newItem.date}
-          onChange={date => changeDate(date)}
-          customInput={<Input />}
-          dateFormat="d MMM yyyy"
-        />
-        <ButtonsContainer>
-          <SelectButton 
-            value="income"
-            type={newItem.type}
-            onClick={e => changeProp(e, 'type')}
-          >Income</SelectButton>
-          <SelectButton 
-            value="spending"
-            type={newItem.type}
-            onClick={e => changeProp(e, 'type')}
-          >Spending</SelectButton>
-        </ButtonsContainer>
-      </div>
-      <BottomContainer>
-        <BottomButton>Edit</BottomButton>
-        <BottomButton color="#6ABEA7" onClick={saveHandler}>Save</BottomButton>
-      </BottomContainer>
-    </FormContainer>
+    <SidebarContainer
+      onClose={onClose}
+      onButtonClick={saveHandler}
+      buttonLabel="Save"
+    >
+      <Input
+        type="text"
+        placeholder="Enter name"
+        value={newItem.name}
+        onChange={e => changeProp(e, 'name')}
+      />
+      <Input
+        type="text"
+        placeholder="Enter value"
+        value={newItem.value}
+        onChange={e => changeProp(e, 'value')}
+      />
+      <TextArea
+        cols="4"
+        placeholder="Enter description"
+        value={newItem.description}
+        onChange={e => changeProp(e, 'description')}
+      />
+      <DatePicker
+        selected={newItem.date}
+        onChange={date => changeDate(date)}
+        customInput={<Input />}
+        dateFormat="d MMM yyyy"
+      />
+      <ButtonsContainer>
+        <SelectButton 
+          value="income"
+          type={newItem.type}
+          onClick={e => changeProp(e, 'type')}
+        >Income</SelectButton>
+        <SelectButton 
+          value="spending"
+          type={newItem.type}
+          onClick={e => changeProp(e, 'type')}
+        >Spending</SelectButton>
+      </ButtonsContainer>
+    </SidebarContainer>
   );
 }

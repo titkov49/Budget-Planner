@@ -4,6 +4,7 @@ export const initialLst = [
     date: Date.now(),
     name: 'Income1223234424324',
     type: 'income',
+    description: 'Mmmmmm... Something very interesting................................................................',
     value: 1000
   },
   {
@@ -11,6 +12,7 @@ export const initialLst = [
     date: Date.now(),
     name: 'Spending123445678',
     type: 'spending',
+    description: 'Mmmmmm... Something very expensive',
     value: 1000
   },
   {
@@ -18,6 +20,7 @@ export const initialLst = [
     date: Date.now(),
     name: 'AAAAAAAAAAA',
     type: 'income',
+    description: 'Oh my god! Is it Ed Sheeran?!',
     value: 1000
   }
 ]

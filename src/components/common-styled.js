@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from 'styled-components';
 
 export const Button = styled.button`
@@ -33,3 +34,36 @@ export const SelectButton = styled(Button)`
 export const ButtonsContainer = styled.div`
   margin: 1rem 0;
 `;
+
+const Value = styled.div`
+  @media screen and (min-width: 768px) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 2rem;
+    div {
+      width: 0.5rem;
+      height: 0.5rem;
+      border-radius: 50%;
+      background-color: ${({ type }) => type === "income" ? "#6ABEA7" : "#EF6F6C"};
+      margin-right: 0.5rem;
+    }
+    p {
+      font-size: ${({size}) => size || "1.25rem"};
+    }
+  }
+  @media screen and (max-width: 768px) {
+    p {
+      background-color: ${({ type }) => type === "income" ? "#6ABEA7" : "#EF6F6C"};
+      padding: 0.5rem;
+      border-radius: 10px;
+    }
+  }
+`;
+
+export const StyledValue = ({ value, type, size }) => (
+  <Value type={type} size={size}>
+    <div></div>
+    <p>{value}</p>
+  </Value>
+);
