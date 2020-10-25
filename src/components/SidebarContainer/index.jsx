@@ -1,15 +1,16 @@
 import React from 'react';
 import { 
   SidebarContainer, StyledCloseIcon, 
-  BottomContainer, BottomButton
+  BottomContainer, BottomButton,
+  ChildrenContainer
 } from './styled';
 
 export default ({ children, onClose, onButtonClick, buttonLabel }) => (
   <SidebarContainer>
-    <div>
+    <ChildrenContainer>
       <StyledCloseIcon onClick={onClose}/>
       {children}
-    </div>
+    </ChildrenContainer>
     <BottomContainer>
       <BottomButton onClick={onButtonClick}>{buttonLabel}</BottomButton>
     </BottomContainer>

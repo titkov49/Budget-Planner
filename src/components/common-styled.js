@@ -13,6 +13,7 @@ export const Button = styled.button`
 
   &:hover {
     border: 1px solid #6ABEA7;
+    box-shadow: 1px 1px 5px #6ABEA7;
   }
 
   &:active {

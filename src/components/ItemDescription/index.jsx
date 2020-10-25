@@ -10,7 +10,7 @@ export default ({ item, onEdit, onClose }) => (
     onButtonClick={onEdit}
     buttonLabel={"Edit"}
   >
-    <h1>{item.name}</h1>
+    <h2>{item.name}</h2>
     <DescriptionContainer>
       <StyledValue
           value={item.value}
