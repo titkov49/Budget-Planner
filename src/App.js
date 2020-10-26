@@ -8,10 +8,10 @@ import { initialLst } from './components/constants';
 import './App.scss';
 
 const ListStyles = styled.div`
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 900px) {
     margin: 0 10rem;
   }
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 900px) {
     margin: 0 1rem;
   }
 `;

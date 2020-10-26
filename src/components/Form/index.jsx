@@ -7,7 +7,7 @@ import SidebarContainer from '../SidebarContainer';
 
 export default function ({ item, list, onClose, onSave }) {
   const [newItem, setItem] = useState({
-    id: item.id || Date.now(),
+    id: Date.now(),
     name: item?.name || '',
     description: item?.description || '',
     date: item?.date || Date.now(),

@@ -1,6 +1,7 @@
 import React from 'react';
 import {
-  StyledItem, StyledDeleteIcon, StyledName
+  StyledItemContainer, StyledDeleteIcon,
+  StyledName, StyledDate
 } from './styled';
 import { StyledValue } from '../common-styled';
 import { format } from 'date-fns';
@@ -12,14 +13,14 @@ export default function ({ item, onDescription, onDelete }) {
   };
 
   return (
-    <StyledItem onClick={() => onDescription(item.id)}>
+    <StyledItemContainer onClick={() => onDescription(item.id)}>
       <StyledDeleteIcon onClick={e => onDeleteHandler(e, item.id)}/>
       <StyledName>{item.name}</StyledName>
       <StyledValue
         value={item.value}
         type={item.type}
       />
-      <div>{format(item.date, 'd MMM yyyy')}</div>
-    </StyledItem>
+      <StyledDate>{format(item.date, 'd MMM yyyy')}</StyledDate>
+    </StyledItemContainer>
   );
 };

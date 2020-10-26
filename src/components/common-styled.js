@@ -37,7 +37,7 @@ export const ButtonsContainer = styled.div`
 `;
 
 const Value = styled.div`
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 900px) {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -53,11 +53,12 @@ const Value = styled.div`
       font-size: ${({size}) => size || "1.25rem"};
     }
   }
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 900px) {
     p {
       background-color: ${({ type }) => type === "income" ? "#6ABEA7" : "#EF6F6C"};
       padding: 0.5rem;
       border-radius: 10px;
+      text-align: center;
     }
   }
 `;
