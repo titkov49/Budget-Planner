@@ -7,11 +7,12 @@ import SidebarContainer from '../SidebarContainer';
 
 export default function ({ item, list, onClose, onSave }) {
   const [newItem, setItem] = useState({
+    id: item.id || Date.now(),
     name: item?.name || '',
     description: item?.description || '',
     date: item?.date || Date.now(),
     type: item?.type || null,
-    value: item?.value || null
+    value: item?.value || ''
   });
 
   const changeProp = (e, prop) => {
@@ -25,7 +26,7 @@ export default function ({ item, list, onClose, onSave }) {
   const saveHandler = () => {
     let newList = [...list];
     if (item) {
-      let index = newList.findIndex(item);
+      let index = list.findIndex(listItem => item.id === listItem.id);
       newList[index] = newItem;
     } else {
       newList.unshift(newItem);
@@ -43,7 +44,7 @@ export default function ({ item, list, onClose, onSave }) {
       <Input
         type="text"
         placeholder="Enter name"
-        value={newItem.name}
+        value={newItem.name || ''}
         onChange={e => changeProp(e, 'name')}
       />
       <Input
