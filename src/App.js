@@ -26,19 +26,32 @@ export default function () {
   const [isFormOpen, setForm] = useState(false);
   const [isDescriptionOpen, setDescription] = useState(false);
   const [listItem, setListItem] = useState(null);
-  const [initialList, setInitialList] = useState(initialLst)
+  const [initialList, setInitialList] = useState([])
   const [modifiedList, setList] = useState(initialLst);
   const [filterType, setFilterType] = useState('initial');
+
+  // Download list from local storage
+  useEffect(() => {
+    if (localStorage.getItem('list')) {
+      setInitialList(JSON.parse(localStorage.getItem('list')));
+    }
+  }, []);
+
+  // Creating and updating localStorage list
+  useEffect(() => {
+    localStorage.setItem('list', JSON.stringify(initialList));
+  }, [initialList]);
+
+  //Updating list based on filtering properties
+  useEffect(() => {
+    setList(filterList(filterType));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filterType, initialList]);
 
   const onDelete = (id) => {
     setInitialList(initialList.filter(item => item.id !== id));
     setList(modifiedList.filter(item => item.id !== id));
   }
-
-  useEffect(() => {
-    setList(filterList(filterType));
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [filterType, initialList]);
 
   const filterList = type => {
     if (type === "initial") {

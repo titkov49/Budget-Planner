@@ -41,4 +41,5 @@ export const StyledName = styled.p`
 export const StyledDate = styled(StyledName)`
   text-align: right;
   font-weight: 400;
-`
+  margin-left: 2rem;
+`;
