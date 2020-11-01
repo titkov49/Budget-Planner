@@ -23,6 +23,18 @@ const InputContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  @media screen and (max-width: 900px) {
+    display: block;
+  }
+`;
+
+const SelectContainer = styled.div`
+  width: 20%;
+  @media screen and (max-width: 900px) {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
 `;
 
 export default function () {
@@ -42,7 +54,7 @@ export default function () {
     }
   }, []);
 
-  // Creating and updating localStorage list
+  // Creating or updating localStorage list
   useEffect(() => {
     localStorage.setItem('list', JSON.stringify(initialList));
   }, [initialList]);
@@ -122,11 +134,13 @@ export default function () {
           <FilterButton onClick={e => setFilterType(e.target.value)} value="income" type={filterType}>Only incomes</FilterButton>
           <FilterButton onClick={e => setFilterType(e.target.value)} value="spending" type={filterType}>Only spendings</FilterButton>
         </ButtonsContainer>
-        <Select
-          value={sortingType}
-          onChange={setSortingType}
-          options={options}
-        />
+        <SelectContainer>
+          <Select
+            value={sortingType}
+            onChange={setSortingType}
+            options={options}
+          />
+        </SelectContainer>
       </InputContainer>
       {
         modifiedList.map(item => <ListItem 

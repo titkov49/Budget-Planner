@@ -1,5 +1,5 @@
 /* eslint-disable import/no-anonymous-default-export */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import { Input, TextArea, AlertBox } from './styled';
@@ -7,7 +7,7 @@ import { ButtonsContainer, SelectButton } from '../common-styled';
 import SidebarContainer from '../SidebarContainer';
 
 export default function ({ item, list, onClose, onSave }) {
-  const [newItem, setItem] = useState({
+  const asignProps = () => ({
     id: item?.id || Date.now(),
     name: item?.name || '',
     description: item?.description || '',
@@ -15,7 +15,14 @@ export default function ({ item, list, onClose, onSave }) {
     type: item?.type || null,
     value: item?.value || ''
   });
+
+  const [newItem, setItem] = useState(asignProps());
   const [errors, setErrors] = useState([]);
+
+  useEffect(() => {
+    setItem(asignProps());
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [item]);
 
   const changeProp = (e, prop) => {
     let obj = {};

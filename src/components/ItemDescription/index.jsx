@@ -18,7 +18,7 @@ export default ({ item, onEdit, onClose }) => (
           type={item.type}
           size="1.75rem"
       />
-      <ItemDescription textAlign="left">{item.description}</ItemDescription>
+      <ItemDescription>{item.description}</ItemDescription>
       <ItemDescription>{format(item.date, 'd MMM yyyy')}</ItemDescription>
     </DescriptionContainer> 
   </SidebarContainer>
