@@ -1,19 +1,21 @@
+/* eslint-disable import/no-anonymous-default-export */
 import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
-import { Input, TextArea } from './styled';
+import { Input, TextArea, AlertBox } from './styled';
 import { ButtonsContainer, SelectButton } from '../common-styled';
 import SidebarContainer from '../SidebarContainer';
 
 export default function ({ item, list, onClose, onSave }) {
   const [newItem, setItem] = useState({
-    id: Date.now(),
+    id: item?.id || Date.now(),
     name: item?.name || '',
     description: item?.description || '',
     date: item?.date || Date.now(),
     type: item?.type || null,
     value: item?.value || ''
   });
+  const [errors, setErrors] = useState([]);
 
   const changeProp = (e, prop) => {
     let obj = {};
@@ -24,6 +26,23 @@ export default function ({ item, list, onClose, onSave }) {
   const changeDate = date => setItem(prev => ({...prev, date: date}))
 
   const saveHandler = () => {
+    //Validation
+    let errorsList = [];
+    if (!/.+/.test(newItem.name)) {
+      errorsList.push('Name must contain at least one character');
+    }
+    if (!/^\d+$/.test(newItem.value)) {
+      errorsList.push('Value must contain only digits (at least one) that is greater than or equal to zero');
+    }
+    if (!newItem.type) {
+      errorsList.push('Type of item must be chosen');
+    }
+    if(errorsList.length > 0) {
+      setErrors(errorsList);
+      return;
+    }
+
+    //Save new item or edit existing one if validation completed successfully 
     let newList = [...list];
     if (item) {
       let index = list.findIndex(listItem => item.id === listItem.id);
@@ -41,6 +60,10 @@ export default function ({ item, list, onClose, onSave }) {
       onButtonClick={saveHandler}
       buttonLabel="Save"
     >
+      {
+        errors.length > 0 &&
+        <AlertBox errors={errors}/>
+      }
       <Input
         type="text"
         placeholder="Enter name"

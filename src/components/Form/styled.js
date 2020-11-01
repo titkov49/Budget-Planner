@@ -1,38 +1,5 @@
+import React from 'react';
 import styled from 'styled-components';
-import Close from '@material-ui/icons/Close'; //TO DELETE
-import {Button} from '../common-styled'; //TO DELETE
-
-//TO DELETE
-export const FormContainer = styled.div`
-  position: absolute;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  text-align: center;
-  padding: 1rem;
-  background-color: white;
-  border: 1px solid #000;
-
-  top:0;
-  right:0;
-  height: 100%;
-  width: 25%;
-  @media screen and (max-width: 900px) {
-    top: 0;
-    left: 0;
-    width: 100%;
-    border: none
-  }
-`;
-
-//TO DELETE
-export const StyledCloseIcon = styled(Close)`
-  color: #EF6F6C;
-  display: block !important;
-  margin-bottom: 1rem;
-`;
 
 export const Input = styled.input`
   width: 75%;
@@ -48,11 +15,30 @@ export const TextArea = styled.textarea`
   resize: none;
 `;
 
-//TO DELETE
-export const BottomContainer = styled.div`width: 100%`;
+const AlertContainer = styled.div`
+  box-sizing: border-box;
+  border: 1px solid #EF6F6C;
+  margin: 0 auto 1rem auto;
+  background-color: #F7A6A5;
+  color: #EF6F6C;
+  width: 80%;
 
-//TO DELETE
-export const BottomButton = styled(Button)`
-  width: 75%;
-  color: ${({ color }) => color || "#5E6973"};
+  h4 {
+    padding: 0 1rem;
+  }
+
+  ul {
+    padding: 0 1.5rem;
+    font-size: 1rem;
+    text-align: left;
+  }
 `;
+
+export const AlertBox = ({ errors }) => (
+  <AlertContainer>
+    <h4>Item should match these requirements</h4>
+    <ul>
+      {errors.map(item => <li>{item}</li>)}
+    </ul>
+  </AlertContainer>
+);

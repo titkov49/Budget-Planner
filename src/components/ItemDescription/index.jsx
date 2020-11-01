@@ -1,3 +1,4 @@
+/* eslint-disable import/no-anonymous-default-export */
 import React from 'react';
 import { format } from 'date-fns';
 import SidebarContainer from '../SidebarContainer';

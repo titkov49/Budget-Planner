@@ -4,6 +4,7 @@ import {Button} from '../common-styled';
 
 export const SidebarContainer = styled.div`
   position: absolute;
+  z-index: 999;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
