@@ -1,3 +1,5 @@
+## GH Page: https://titkov49.github.io/budget-planner/
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
